@@ -6,5 +6,18 @@
 </head>
 <body>
 <h1 th:text="'List of owners from thymeleaf'">List of owners</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>first name</th>
+        <th>last name</th>
+    </tr>
+    <tr th:each="owner : ${owners}">
+        <td th:text="${owner.id}">123</td>
+        <td th:text="${owner.firstName}"> Spring in Action</td>
+        <td th:text="${owner.lastName}">Wrox</td>
+    </tr>
+</table>
 </body>
 </html>
