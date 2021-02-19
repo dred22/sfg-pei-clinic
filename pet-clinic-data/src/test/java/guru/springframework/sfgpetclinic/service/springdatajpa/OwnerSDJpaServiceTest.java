@@ -55,6 +55,18 @@ class OwnerSDJpaServiceTest {
     }
 
     @Test
+    void findAllByLastNameLike() {
+        when(ownerRepository.findAllByLastNameLike(LAST_NAME)).thenReturn(Set.of(returnOwner));
+
+        Set<Owner> owners = service.findAllByLastNameLike(LAST_NAME);
+
+        assertEquals(1, owners.size());
+        assertEquals(returnOwner, owners.iterator().next());
+
+        verify(ownerRepository).findAllByLastNameLike(LAST_NAME);
+    }
+
+    @Test
     void findAll() {
         Set<Owner> returnOwnersSet = new HashSet<>();
         returnOwnersSet.add(Owner.builder().id(1l).build());
