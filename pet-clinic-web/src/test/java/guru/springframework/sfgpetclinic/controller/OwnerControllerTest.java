@@ -66,33 +66,33 @@ class OwnerControllerTest {
     }
     @Test
     void processFindFormReturnEmpty() throws Exception {
-        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Collections.emptySet());
+        when(ownerService.findAllByLastNameContainingIgnoreCase(anyString())).thenReturn(Collections.emptySet());
         ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/owners"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/findOwners"));
         //.andExpect(model().attributeExists("selections"));
 
-        verify(ownerService).findAllByLastNameLike(anyString());
+        verify(ownerService).findAllByLastNameContainingIgnoreCase(anyString());
     }
     @Test
     void processFindFormReturnMany() throws Exception {
-        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(owners);
+        when(ownerService.findAllByLastNameContainingIgnoreCase(anyString())).thenReturn(owners);
         mockMvc.perform(MockMvcRequestBuilders.get("/owners"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("owners/ownersList"))
                 .andExpect(model().attributeExists("selections"));
 
-        verify(ownerService).findAllByLastNameLike(anyString());
+        verify(ownerService).findAllByLastNameContainingIgnoreCase(anyString());
     }
     @Test
     void processFindFormReturnOne() throws Exception {
-        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(Set.of(Owner.builder().id(1L).build()));
+        when(ownerService.findAllByLastNameContainingIgnoreCase(anyString())).thenReturn(Set.of(Owner.builder().id(1L).build()));
         mockMvc.perform(MockMvcRequestBuilders.get("/owners"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"))
                 .andExpect(model().attributeExists("owner"));
 
-        verify(ownerService).findAllByLastNameLike(anyString());
+        verify(ownerService).findAllByLastNameContainingIgnoreCase(anyString());
     }
 
 

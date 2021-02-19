@@ -56,14 +56,14 @@ class OwnerSDJpaServiceTest {
 
     @Test
     void findAllByLastNameLike() {
-        when(ownerRepository.findAllByLastNameLike(LAST_NAME)).thenReturn(Set.of(returnOwner));
+        when(ownerRepository.findAllByLastNameContainingIgnoreCase(LAST_NAME)).thenReturn(Set.of(returnOwner));
 
-        Set<Owner> owners = service.findAllByLastNameLike(LAST_NAME);
+        Set<Owner> owners = service.findAllByLastNameContainingIgnoreCase(LAST_NAME);
 
         assertEquals(1, owners.size());
         assertEquals(returnOwner, owners.iterator().next());
 
-        verify(ownerRepository).findAllByLastNameLike(LAST_NAME);
+        verify(ownerRepository).findAllByLastNameContainingIgnoreCase(LAST_NAME);
     }
 
     @Test
