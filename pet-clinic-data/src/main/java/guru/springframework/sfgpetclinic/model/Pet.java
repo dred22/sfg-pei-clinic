@@ -34,6 +34,8 @@ public class Pet extends BaseEntity {
         this.petType = petType;
         this.owner = owner;
         this.birthDay = birthDay;
-        this.visits = visits;
+        if(visits != null){
+            this.visits = visits;
+        }
     }
 }
